@@ -3,7 +3,9 @@ package com.midas.springjpa.web;
 import com.midas.springjpa.domain.posts.Posts;
 import com.midas.springjpa.domain.posts.PostsRepository;
 import com.midas.springjpa.web.dto.PostsSaveRequestDto;
+import com.midas.springjpa.web.dto.PostsUpdateRequestDto;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,8 +13,13 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,6 +32,11 @@ class PostsApiControllerTest {
     @Autowired private TestRestTemplate restTemplate;
 
     @Autowired private PostsRepository postsRepository;
+
+    @AfterEach
+    void tearDown() {
+        postsRepository.deleteAll();
+    }
 
     @Test
     public void Posts_등록된다() throws Exception {
@@ -48,5 +60,39 @@ class PostsApiControllerTest {
         List<Posts> all = postsRepository.findAll();
         assertThat(all.get(0).getTitle()).isEqualTo(title);
         assertThat(all.get(0).getContent()).isEqualTo(content);
+    }
+
+    @Test
+    public void Posts_수정된다() throws Exception {
+        // given
+        String title = "title";
+        String content = "content";
+
+        Posts savedPosts = postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .author("midas")
+                .build());
+
+        Long updateId = savedPosts.getId();
+
+        String updateTitle = "updatedTitle";
+        String updateContent = "updatedContent";
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+
+        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
+                .title(updateTitle)
+                .content(updateContent)
+                .build();
+
+        // when
+        restTemplate.put(url, requestDto);
+
+        Posts findOne = postsRepository.findById(updateId).get();
+
+        // then
+        assertThat(findOne.getTitle()).isEqualTo(updateTitle);
+        assertThat(findOne.getContent()).isEqualTo(updateContent);
     }
 }
