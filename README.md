@@ -37,3 +37,22 @@
       - 일반적으로 Controllor와 Repository의 중간 영역에서 사용됩니다.
       - @Transactional이 사용되어야 되는 영역
 
+---
+### 3. JUNIT
+
+- MockMvc
+    - @WebMvcTest
+
+
+---
+### 4. Java8
+
+- lambda
+  - .map(PostListResponseDto::new) <-- .map(new PostListResponseDto(posts))
+
+
+---
+### Extra. 이슈사항
+1. (2021.11.15) Test 소스에서 Transaction이 걸린 상태로 url로 update를 날리니, Transaction 상태라 저장된 정보를 조회할 수 없으니 오류 발생.
+
+   ==> Transaction을 빼고, teardown메서드로 deleteAll() 추가로 해결 완료
