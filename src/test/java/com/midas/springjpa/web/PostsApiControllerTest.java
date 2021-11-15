@@ -4,7 +4,6 @@ import com.midas.springjpa.domain.posts.Posts;
 import com.midas.springjpa.domain.posts.PostsRepository;
 import com.midas.springjpa.web.dto.PostsSaveRequestDto;
 import com.midas.springjpa.web.dto.PostsUpdateRequestDto;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +12,11 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PostsApiControllerTest {
@@ -94,5 +88,28 @@ class PostsApiControllerTest {
         // then
         assertThat(findOne.getTitle()).isEqualTo(updateTitle);
         assertThat(findOne.getContent()).isEqualTo(updateContent);
+    }
+    
+    @Test
+    public void Posts_삭제된다() throws Exception {
+        // given
+        Posts savedPosts = postsRepository.save(Posts.builder()
+                .title("title")
+                .content("content")
+                .author("midas")
+                .build());
+
+        Long deleteId = savedPosts.getId();
+
+        String url = "http://localhost:" + port + "/api/v1/posts/" + deleteId;
+
+        // when
+        restTemplate.delete(url);
+
+        // then
+        assertThrows(IllegalArgumentException.class, () -> {
+            postsRepository.findById(deleteId).orElseThrow(() -> new IllegalArgumentException("해당 게시글은 존재하지 않습니다. id=" + deleteId));
+        });
+        
     }
 }
