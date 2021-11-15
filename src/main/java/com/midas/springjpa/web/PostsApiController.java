@@ -1,8 +1,8 @@
 package com.midas.springjpa.web;
 
 import com.midas.springjpa.service.PostsService;
-import com.midas.springjpa.web.dto.PostsSaveRequestDto;
-import com.midas.springjpa.web.dto.PostsUpdateRequestDto;
+import com.midas.springjpa.web.dto.posts.PostsSaveRequestDto;
+import com.midas.springjpa.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.midas.springjpa.web.dto;
+package com.midas.springjpa.web.dto.posts;
 
 import lombok.Builder;
 import lombok.Getter;

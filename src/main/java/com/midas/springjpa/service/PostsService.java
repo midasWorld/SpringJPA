@@ -2,9 +2,9 @@ package com.midas.springjpa.service;
 
 import com.midas.springjpa.domain.posts.Posts;
 import com.midas.springjpa.domain.posts.PostsRepository;
-import com.midas.springjpa.web.dto.PostsListResponseDto;
-import com.midas.springjpa.web.dto.PostsSaveRequestDto;
-import com.midas.springjpa.web.dto.PostsUpdateRequestDto;
+import com.midas.springjpa.web.dto.posts.PostsListResponseDto;
+import com.midas.springjpa.web.dto.posts.PostsSaveRequestDto;
+import com.midas.springjpa.web.dto.posts.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

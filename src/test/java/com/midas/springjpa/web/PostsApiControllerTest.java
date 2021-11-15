@@ -2,8 +2,8 @@ package com.midas.springjpa.web;
 
 import com.midas.springjpa.domain.posts.Posts;
 import com.midas.springjpa.domain.posts.PostsRepository;
-import com.midas.springjpa.web.dto.PostsSaveRequestDto;
-import com.midas.springjpa.web.dto.PostsUpdateRequestDto;
+import com.midas.springjpa.web.dto.posts.PostsSaveRequestDto;
+import com.midas.springjpa.web.dto.posts.PostsUpdateRequestDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
