@@ -2,6 +2,7 @@ package com.midas.springjpa.web;
 
 import com.midas.springjpa.domain.auth.User;
 import com.midas.springjpa.domain.auth.UserRepository;
+import com.midas.springjpa.exception.auth.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,9 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public Optional<User> findById(@PathVariable Long id) {
-        return userRepository.findById(id);
+    public User findById(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다. id=" + id));
+        return user;
     }
 
     @PostMapping("/users")
