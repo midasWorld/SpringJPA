@@ -4,6 +4,8 @@ import com.midas.springjpa.domain.auth.User;
 import com.midas.springjpa.domain.auth.UserRepository;
 import com.midas.springjpa.exception.auth.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,6 +14,9 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,9 +30,16 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User findById(@PathVariable Long id) {
+    public ResponseEntity<EntityModel<User>> findById(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원입니다. id=" + id));
-        return user;
+
+        // HATEOAS
+        EntityModel entityModel = EntityModel.of(user);
+
+        WebMvcLinkBuilder linkTo = linkTo(methodOn(this.getClass()).findAll());
+        entityModel.add(linkTo.withRel("all-users"));
+
+        return ResponseEntity.ok(entityModel);
     }
 
     @PostMapping("/users")
