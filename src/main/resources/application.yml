@@ -7,9 +7,13 @@ spring:
   messages:
     basename: messages
 
-logging:
-  level:
-    org.springframework: DEBUG
+  h2:
+    console:
+      enabled: true
+
+#logging:
+#  level:
+#    org.springframework: DEBUG
 
 management:
   endpoints:
