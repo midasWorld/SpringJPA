@@ -1,5 +1,7 @@
 package com.midas.springjpa.domain.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Getter @Setter
+@JsonIgnoreProperties(value = {"password"})
 @Entity
 public class User {
 
@@ -19,4 +22,5 @@ public class User {
     private String name;
 
     private String password;
+    private String ssn;
 }
