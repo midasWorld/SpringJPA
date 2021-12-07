@@ -2,6 +2,11 @@
 
 ---
 
+## 목차
+
+1. [TDD](#1.-TDD)
+2. [Security](#6.-Security)
+
 ### 1. TDD
 - TDD란?
     - 테스트 주도 개발 (Test-Driven Development)
@@ -117,12 +122,14 @@
   - .map(PostListResponseDto::new) <-- .map(new PostListResponseDto(posts))
 
 ---
-### 5. Security
+## 6. Security
 
+- 인증과 인가
+- JWT
 - 
 
 ---
-### 6. Web Service & Web Application
+### 7. Web Service & Web Application
 
 - 네트워크 상에서 서로 다른 종류의 컴퓨터들 간에 상호작용하기 위한 소프트웨어 시스템
 - client -> web server -> web application -> database
@@ -146,7 +153,7 @@
   - 전송되는 방법 & 전송 규약
   - 개발의 용의성
 ---
-###7. Annotation
+### 8. Annotation
 
 - @Data -> Setter + Getter + ToString
 - @AllArgsConstructor : 클래스변수의 생성자 자동 생성
@@ -155,7 +162,7 @@
 - 
 
 ---
-###8. Spring Boot API
+### 9. Spring Boot API
 - HATEOAS
   - Hypermedia As the Engin of Application State
   - 현재 리소스와 연관된(호출 가능한) 자원 상태 정보를 제공
@@ -190,7 +197,7 @@
 - Spring Security
 - Configuration → 
 ---
-###9. JPA
+### 10. JPA
 - 구성도
   - Spring Data JPA
   - JPA
