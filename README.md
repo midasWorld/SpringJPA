@@ -4,8 +4,8 @@
 
 ## 목차
 
-1. [TDD](#1.-TDD)
-2. [Security](#6.-Security)
+1. [TDD](#1.-tdd)
+2. [Security](#6.-security)
 
 ### 1. TDD
 - TDD란?
@@ -123,7 +123,7 @@
 
 ---
 ## 6. Security
-
+### 안돼애
 - 인증과 인가
 - JWT
 - 
