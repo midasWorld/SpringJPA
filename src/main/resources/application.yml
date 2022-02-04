@@ -19,3 +19,13 @@ spring:
   datasource:
     driver-class-name: org.h2.Driver
     url: jdbc:h2:mem:testdb
+
+jwt:
+  expires_sec: 86400
+  secret: '%^@tw@6VGVa@GtQ0l%VX#r4sWKN3t99E'
+  refresh_secret: 'zlJ*xql#AHarmgwp78f8uPsA$3HnzkcY'
+  issure: midas
+  subject: auth
+
+bcrypt:
+  salt_rounds: 12

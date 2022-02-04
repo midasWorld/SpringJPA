@@ -135,8 +135,51 @@
 - ...
 ---
 ## Security
-- 인증과 인가
-- JWT
+- 인증이란 무엇인가?
+  - you are who you say you are
+    - You know : password, pin-conde -> This!
+    - You have : mobile phone, hardware token
+    - You are : fingerprints, signature
+  - But how does AUTH happen?
+    - Authentication : 인증, 로그인
+- Session & Cookie
+  - 장점
+    - 만들기가 쉽고(Make it easy), Session 은 서버에 저장되어 있어서 믿을 수 있다. (Trusted)
+  - 단점
+    - client 요청을 처리하기 위해, 여러 서버에서 Session 을 위한 네트워크 요청을 해야 되므로, 성능 이슈가 있을 수 있다.
+- JWT - Json Web Token 2010
+  - 구조
+    - Header
+    - Payload
+    - signature
+  - Json 이라는 파일 안에 필요한 모든 데이터를 함께 넣어 주고 받을 수 있다.
+  - secret 과 함께 인코딩 해놓음으로써, 악의적으로 Payload 정보를 바꿔도 signature 를 통해 검증할 수 있다.
+  - 장점
+    - No State -> Session 을 서버에 저장하지 않기 때문에, 성능적인 이점이 있다.
+  - 단점
+    - 영원히 만료되지 않는 JWT 를 주고 받는다면, 해커가 악용할 수 있다. => 보안에 유념해서 사용해야 한다.
+    - Payload 정보가 많아지면 네트워크 사용량이 증가하기 때문에, 데이터 설계 고려가 필요하다.
+  - 참고 링크 : https://jwt.io/
+    - 사용법
+      1. Secret Key 생성 - Generate a secure password (사이트) : https://www.lastpass.com/features/password-generator
+         - 보통 권고되는 사이즈 = 32
+      2. jwt 에서 Decoded 정보를 확인할 수 있다.
+      3. 만료시간 설정!
+- bcrypt 란? 
+  - password-hashing function
+  - bcrypt 란 패스워드를 안전하게 보관할 수 있도록 패스워드를 해싱하는 알고리즘
+  - 그대로 보관하면, 해커에게 악용될 수 있으므로 암호화하여 보관하는것을 권장!
+  - 구조
+    - Alg : 어떤 알고리즘을 썼는지, 알고리즘에 대한 정보
+    - Cost : 얼마나 많은 복잡도로 했는지, 암호화를 위한 비용
+    - 🌟 Salt : 암호화를 할때, 우리가 원하는 길이만큼의 더 랜덤한 것들을 이용해서 암호화를 복잡하게 만드는 Salt!
+      - Salt 를 쓰면 해독해야되는 갯수가 기하급수적으로 늘어난다.
+    - Hash : 최종적으로 암호화된 정보
+    - Salt 를 쓰지 않는다면, 해커들이 해시 테이블을 만들며 해독할 수 있다!
+  - 사용법
+    - Salt 길이별로 성능 측정 : https://auth0.com/blog/hashing-in-action-understanding-bcrypt/
+    - Secret Key 생성 : https://www.lastpass.com/features/password-generator
+      - 32 Character 길이 추천
 ---
 ## Web Service & Web Application
 
