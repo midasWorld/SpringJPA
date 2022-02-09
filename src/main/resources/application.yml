@@ -17,5 +17,11 @@ spring:
     generate-ddl: true
     defer-datasource-initialization: true
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ENC(BZsMzK54LGn4W/khyElGDu4UmikHbewHaiZYYEFuYLlT2thW3TaGt9fBnlMG4uPAWwrDbvM7bQSZHKwOf5wlooDA6jDh27IdpRCribhbb+c=)
+    username: ENC(lfQUXZ6VQJaziLPsXbsQG9hufPPyDirywxph5t5amI0ZheYKCixg7RC1rSrSINic)
+    password: ENC(p4jZMpG4FotdAIfuBbPuAhdsGSjqnW0/iX7FgqeVGx49R5YwWpFlle8QJZdsEJAt)
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
