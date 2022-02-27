@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @RestController
@@ -18,7 +20,7 @@ public class MemberController {
 
   @PostMapping("/users/join")
   public ApiResponse<MemberResponseDto> join(
-          @RequestBody SignUpRequestDto requestDto) {
+          @Valid @RequestBody SignUpRequestDto requestDto) {
     return ApiResponse.ok(new MemberResponseDto(
             memberService.join(requestDto.toEntity())
     ));
