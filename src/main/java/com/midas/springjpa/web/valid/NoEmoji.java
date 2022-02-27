@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = NoEmojiValidator.class)
 @Documented
 public @interface NoEmoji {
-  String message() default "Emoji is not allowed";
+  String message() default "{validation.NoEmoji.message}";
   Class<?>[] groups() default {};
   Class<? extends Payload>[] payload() default {};
 }

@@ -12,7 +12,7 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 public class SignUpRequestDto {
 
-  @Email(message = "이메일 형식이 올바르지 않습니다.")
+  @Email(message = "{validation.email.message}")
   @NotNull
   private String email;
 

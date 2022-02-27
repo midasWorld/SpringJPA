@@ -1,6 +1,5 @@
 package com.midas.springjpa.web.valid;
 
-import com.midas.springjpa.web.dto.member.SignUpRequestDto;
 import com.vdurmont.emoji.EmojiParser;
 import org.apache.commons.lang3.StringUtils;
 
